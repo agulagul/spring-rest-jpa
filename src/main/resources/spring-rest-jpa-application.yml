@@ -1,0 +1,32 @@
+log:
+  threshold: DEBUG
+  file:
+    name: spring-rest-jpa
+    location: /var/log
+    totalSizeCap: 1GB
+    patternLayout:
+      "%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%5p) [%t] [%X{origin}]
+      [%X{sessionid}] [%X{correlation}] [%X{userid}] [%X{useragent}] :: %m%n"
+  console:
+    patternLayout:
+      "%highlight(%5p) :: %m%n"
+  trans:
+    stdoutEnable: Y
+    maxHistory: 1
+    rollingPolicy: 2
+    maxBackupIndex: 10
+    maxFileSize: 10MB
+  verbose:
+    stdoutEnable: N
+    maxHistory: 1
+    rollingPolicy: 2
+    maxBackupIndex: 10
+    maxFileSize: 50MB
+    
+datasource:
+  jdbc:
+    url: jdbc:postgresql://10.43.6.167:3030/sample_db
+    username: docker
+    password: docker
+  jndi:
+    url: java:jboss/datasources/ds_graphql_demo

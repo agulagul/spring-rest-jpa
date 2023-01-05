@@ -1,0 +1,14 @@
+<jboss-deployment-structure>
+    <deployment>
+        <exclusions>
+            <module name="ch.qos.logback"/>
+            <module name="org.apache.log4j"/>
+            <module name="org.apache.commons.logging"/>
+            <module name="org.slf4j" />
+            <module name="org.slf4j.impl" />
+        </exclusions>
+        <exclude-subsystems>
+            <subsystem name="logging" />
+        </exclude-subsystems>
+    </deployment>
+</jboss-deployment-structure>

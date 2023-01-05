@@ -1,0 +1,81 @@
+---
+variable:
+  DEV1:
+    params_target: 1
+    params_compile: dev
+    jboss_group: nlo_group_c
+  DEV2:
+    params_target: 2
+    params_compile: dev
+    jboss_group: nlo_group_c
+  DEV3:
+    params_target: 3
+    params_compile: dev
+    jboss_group: nlo_group_c
+  UAT1:
+    params_target: 1
+    params_compile: uat
+    jboss_group: nlo_group_c
+  UAT2:
+    params_target: 2
+    params_compile: uat
+    jboss_group: nlo_group_c
+  UAT3:
+    params_target: 3
+    params_compile: uat
+    jboss_group: nlo_group_c
+  master:
+    params_target: ''
+    params_compile: ''
+
+pipeline:
+  build:
+    compile:
+    - tools: mvn
+      command: clean package -DskipTests
+  release:
+    specific:
+    - item_type: file
+      item_name: smile-world-api.war
+      source: target/
+      target: /bcanlo/app/deployment
+    - item_type: file
+      item_name: smile-world-api.war
+      source: target/
+      target: /bcanlo/app/deployment/{{params_compile}}{{params_target}}
+  publish:
+    DEV{{params_target}}:
+    - auto_deploy: true
+      backup: false
+      ip_address: 10.27.2.106
+      username: appnlo
+      default_path: /bcanlo/app
+    UAT{{params_target}}:
+    - auto_deploy: true
+      backup: true
+      ip_address: 10.27.2.107
+      username: appnlo
+      default_path: /bcanlo/app
+    - auto_deploy: true
+      backup: true
+      ip_address: 10.27.2.108
+      username: appnlo
+      default_path: /bcanlo/app
+  # restart:
+  #   DEV{{params_target}}:
+  #   - auto_restart: true
+  #     web_server: jboss
+  #     job_type: ansible
+  #     admin_address: 10.27.2.106
+  #     admin_port: 50071
+  #     task: Restart Pilihan
+  #     instance: nlo_dev_api_01
+  #   UAT{{params_target}}:
+  #   - auto_restart: true
+  #     web_server: jboss
+  #     job_type: ansible
+  #     admin_address: 10.27.2.107
+  #     admin_port: 50071
+  #     task: Restart Pilihan
+  #     instance: nlo_uat_api_01,nlo_uat_api_02
+      

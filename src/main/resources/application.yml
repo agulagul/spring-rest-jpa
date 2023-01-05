@@ -1,0 +1,13 @@
+spring:
+  config:
+    import: file:${CONFIG_DIR}/spring-rest-jpa-application.yml
+  profiles:
+    active: @spring.profiles.active@
+  main:
+    allow-bean-definition-overriding: true
+
+management:
+  endpoints.web.exposure.include: refresh
+
+springdoc:
+  packagesToScan: com.bca.opentemplate.springrestjpa.controller
