@@ -4,7 +4,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
 
-	<localRepository>C:\GUL\cache\maven-libs</localRepository>
+	<localRepository>/var/cache/maven-libs</localRepository>
 	<mirrors>
 		<mirror>
 			<id>bcaartifactory</id>
@@ -22,13 +22,7 @@
 	</mirrors>
 	<profiles>
 		<profile>
-			<id>repo1</id>
-			<activation>
-				<property>
-					<name>env</name>
-					<value>bca2</value>
-				</property>
-			</activation>
+			<id>bcaartifactory</id>
 			<repositories>
 				<repository>
 					<id>repo1.maven.org</id>
@@ -40,8 +34,18 @@
 						<checksumPolicy>warn</checksumPolicy>
 					</releases>
 				</repository>
+				<repository>
+					<id>devops</id>
+					<name>RepositoryDevOps</name>
+					<url>http://10.6.85.36:8080/artifactory/list/RepositoryDevOps/</url>
+					<releases>
+						<enabled>true</enabled>
+						<updatePolicy>never</updatePolicy>
+						<checksumPolicy>warn</checksumPolicy>
+					</releases>
+				</repository>
 			</repositories>
-	
+
 			<pluginRepositories>
 				<pluginRepository>
 					<id>repo1.maven.org</id>
@@ -59,12 +63,28 @@
 					<url>http://10.6.85.36:8080/artifactory/list/Repo1Maven/</url>
 					<layout>default</layout>
 				</pluginRepository>
+				<pluginRepository>
+					<id>devops</id>
+					<name>RepositoryDevOps</name>
+					<releases>
+						<enabled>true</enabled>
+						<updatePolicy>never</updatePolicy>
+						<checksumPolicy>warn</checksumPolicy>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+						<updatePolicy>never</updatePolicy>
+						<checksumPolicy>fail</checksumPolicy>
+					</snapshots>
+					<url>http://10.6.85.36:8080/artifactory/list/RepositoryDevOps/</url>
+					<layout>default</layout>
+				</pluginRepository>
 			</pluginRepositories>
 		</profile>
 	</profiles>
 
 	<activeProfiles>
-		<activeProfile>repo1</activeProfile>
+		<activeProfile>bcaartifactory</activeProfile>
 	</activeProfiles>
 
 </settings>
