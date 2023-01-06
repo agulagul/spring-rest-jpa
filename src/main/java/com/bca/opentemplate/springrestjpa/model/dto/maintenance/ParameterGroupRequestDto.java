@@ -9,9 +9,6 @@ import lombok.Data;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ParameterGroupRequestDto {
 
-  @JsonProperty("param_group_id")
-  private String paramGroupId;
-  
   @JsonProperty("param_group_code")
   private String paramGroupCode;
 

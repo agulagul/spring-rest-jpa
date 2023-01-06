@@ -8,9 +8,6 @@ import lombok.Data;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ParameterDetailRequestDto {
-
-  @JsonProperty("param_detail_id")
-  private String paramDetailId;
   
   @JsonProperty("param_detail_code")
   private String paramDetailCode;

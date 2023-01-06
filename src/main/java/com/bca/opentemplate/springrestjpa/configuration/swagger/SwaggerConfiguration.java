@@ -12,7 +12,7 @@ public class SwaggerConfiguration {
         @Bean
         public OpenAPI customOpenAPI() {
                 return new OpenAPI()
-                                .info(new Info().title("Graphql DEMO API"));
+                                .info(new Info().title("Spring REST JPA API"));
 
         }
 

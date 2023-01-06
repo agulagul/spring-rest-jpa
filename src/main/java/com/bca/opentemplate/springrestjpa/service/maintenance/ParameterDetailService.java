@@ -57,10 +57,10 @@ public class ParameterDetailService {
     return modelMapper.map(createdParameterDetail, ParameterDetailResponseDto.class);
   }
   
-  public ParameterDetailResponseDto updateParameterDetail(ParameterDetailRequestDto parameterDetailRequest){
+  public ParameterDetailResponseDto updateParameterDetail(UUID id, ParameterDetailRequestDto parameterDetailRequest){
     User user = userRepository.findById(UUID.fromString(parameterDetailRequest.getUpdatedBy())).get();
     ParameterGroup parameterGroup = parameterGroupRepository.findById(UUID.fromString(parameterDetailRequest.getParameterGroupId())).get();
-    ParameterDetail parameterDetail = parameterDetailRepository.findById(UUID.fromString(parameterDetailRequest.getParamDetailId())).get();
+    ParameterDetail parameterDetail = parameterDetailRepository.findById(id).get();
     modelMapper.map(parameterDetailRequest, parameterDetail);
     parameterDetail.setUpdatedBy(user);
     parameterDetail.setParamGroup(parameterGroup);
@@ -68,8 +68,8 @@ public class ParameterDetailService {
     return modelMapper.map(parameterDetail, ParameterDetailResponseDto.class);
   }
   
-  public ParameterDetailResponseDto deleteParameterDetail(ParameterDetailRequestDto parameterDetailRequestDto){
-    ParameterDetail parameterDetail = parameterDetailRepository.findById(UUID.fromString(parameterDetailRequestDto.getParamDetailId())).get();
+  public ParameterDetailResponseDto deleteParameterDetail(UUID id){
+    ParameterDetail parameterDetail = parameterDetailRepository.findById(id).get();
     parameterDetailRepository.delete(parameterDetail);
     return modelMapper.map(parameterDetail, ParameterDetailResponseDto.class);
   }

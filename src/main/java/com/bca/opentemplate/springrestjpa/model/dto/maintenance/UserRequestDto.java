@@ -9,9 +9,6 @@ import lombok.Data;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserRequestDto {
 
-  @JsonProperty("user_id")
-  private String userId;
-
   @JsonProperty("user_name")
   private String userName;
 }

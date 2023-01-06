@@ -43,8 +43,8 @@ public class UserService {
     return modelMapper.map(createdUser, UserResponseDto.class);
   }
   
-  public UserResponseDto updateUser(UserRequestDto userRequestDto){
-    User user = userRepository.findById(UUID.fromString(userRequestDto.getUserId())).get();
+  public UserResponseDto updateUser(UUID id, UserRequestDto userRequestDto){
+    User user = userRepository.findById(id).get();
     modelMapper.map(userRequestDto, user);
     userRepository.save(user);
     return modelMapper.map(user, UserResponseDto.class);

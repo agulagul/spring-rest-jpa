@@ -49,17 +49,17 @@ public class ParameterGroupService {
     return modelMapper.map(createdParameterGroup, ParameterGroupResponseDto.class);
   }
   
-  public ParameterGroupResponseDto updateParameterGroup(ParameterGroupRequestDto parameterGroupRequest){
+  public ParameterGroupResponseDto updateParameterGroup(UUID id, ParameterGroupRequestDto parameterGroupRequest){
     User user = userRepository.findById(UUID.fromString(parameterGroupRequest.getUpdatedBy())).get();
-    ParameterGroup parameterGroup = parameterGroupRepository.findById(UUID.fromString(parameterGroupRequest.getParamGroupId())).get();
+    ParameterGroup parameterGroup = parameterGroupRepository.findById(id).get();
     modelMapper.map(parameterGroupRequest, parameterGroup);
     parameterGroup.setUpdatedBy(user);
     parameterGroupRepository.save(parameterGroup);
     return modelMapper.map(parameterGroup, ParameterGroupResponseDto.class);
   }
   
-  public ParameterGroupResponseDto deleteParameterGroup(ParameterGroupRequestDto parameterGroupRequest){
-    ParameterGroup parameterGroup = parameterGroupRepository.findById(UUID.fromString(parameterGroupRequest.getParamGroupId())).get();
+  public ParameterGroupResponseDto deleteParameterGroup(UUID id){
+    ParameterGroup parameterGroup = parameterGroupRepository.findById(id).get();
     parameterGroupRepository.delete(parameterGroup);
     return modelMapper.map(parameterGroup, ParameterGroupResponseDto.class);
   }
